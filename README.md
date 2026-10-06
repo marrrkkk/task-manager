@@ -85,6 +85,8 @@ Example task:
 
 - PATCH accepts `completed` only. Any other field (or combination) in a
   PATCH body returns `400`. Use PUT for title/description.
+- PUT accepts `title` and `description` only. Sending anything else
+  (e.g. `completed`) returns `400`. Use PATCH for completed status.
 - SQLite is used as required; no other database or service is needed.
 - The Vite dev proxy handles local frontend/backend communication, so
   no CORS package is installed.

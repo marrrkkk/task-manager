@@ -53,6 +53,17 @@ class TaskApiTests(APITestCase):
         self.assertEqual(task.title, "New")
         self.assertEqual(task.description, "New desc")
 
+    def test_put_rejects_completed(self):
+        task = Task.objects.create(title="T")
+        res = self.client.put(
+            f"/tasks/{task.id}/",
+            {"title": "T2", "description": "d", "completed": True},
+            format="json",
+        )
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+        task.refresh_from_db()
+        self.assertFalse(task.completed)
+
     def test_patch_completed_true_and_false(self):
         task = Task.objects.create(title="T")
         res = self.client.patch(f"/tasks/{task.id}/", {"completed": True}, format="json")

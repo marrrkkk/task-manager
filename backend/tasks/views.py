@@ -23,6 +23,11 @@ class TaskViewSet(viewsets.ViewSet):
 
     def update(self, request, pk=None):
         task = get_object_or_404(Task, pk=pk)
+        if set(request.data.keys()) - {"title", "description"}:
+            return Response(
+                {"detail": "PUT accepts only title and description. Use PATCH for completed."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         serializer = TaskSerializer(task, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

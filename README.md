@@ -35,35 +35,56 @@ frontend/   Vite + React app
 
 ## Backend Setup
 
-```bash
-cd backend
-python -m venv venv
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
+1. Go to the backend folder:
+   ```bash
+   cd backend
+   ```
+2. Create a virtual environment (keeps this project's packages
+   isolated from your system Python):
+   ```bash
+   python -m venv venv
+   ```
+3. Activate it:
 
-Activate the virtual environment first:
+   | OS | Command |
+   | --- | --- |
+   | macOS / Linux | `source venv/bin/activate` |
+   | Windows (cmd) | `venv\Scripts\activate` |
+   | Windows (PowerShell) | `venv\Scripts\Activate.ps1` |
 
-| OS | Activate command |
-| --- | --- |
-| macOS / Linux | `source venv/bin/activate` |
-| Windows (cmd) | `venv\Scripts\activate` |
-| Windows (PowerShell) | `venv\Scripts\Activate.ps1` |
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Create the database:
+   ```bash
+   python manage.py migrate
+   ```
+6. Start the server:
+   ```bash
+   python manage.py runserver
+   ```
 
 The API is available at `http://127.0.0.1:8000/tasks/`.
 
 ## Frontend Setup
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+1. In a new terminal, go to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+4. Open the URL printed by Vite (usually `http://localhost:5173`).
 
-Open the URL printed by Vite (usually `http://localhost:5173`).
 API calls to `/tasks/` are proxied to `http://127.0.0.1:8000`
-(see `vite.config.js`), so run the backend first.
+(see `vite.config.js`), so the backend must be running first.
 
 ## API Endpoints
 
